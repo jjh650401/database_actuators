@@ -162,6 +162,8 @@ database_actuators/
 └── README.md               # 專案簡介
 ```
 
+---
+
 ### **4.2 初始化專案為 Git 儲存庫**
 若專案尚未初始化為 Git 儲存庫，請執行以下指導：
 
@@ -195,7 +197,176 @@ database_actuators/
    ```
    - 如果返回錯誤訊息，例如 **`not a git repository`**，請檢查當前目錄是否正確。
 
-此步驟完成後，專案已準備與 GitHub 進行連結。
+---
+
+### **4.3 確認本地與遠端分支**
+1. **檢查本地分支**
+   執行以下命令確認目前所在分支名稱：
+   ```cmd
+   git branch
+   ```
+   - 預期結果會顯示目前所在分支名稱，例如：
+     ```plaintext
+     * master
+     ```
+     這表示當前分支是 **`master`**。
+
+2. **檢查遠端儲存庫分支**
+   執行以下命令檢查遠端儲存庫是否已存在分支：
+   ```cmd
+   git remote show origin
+   ```
+   - 如果遠端分支顯示為 `main`，而您的本地分支是 `master`，則需要同步名稱。
+
+---
+
+### **4.4 設定正確分支名稱**
+若您的本地與遠端分支名稱不同，請按照以下步驟進行修正：
+
+#### **方法 1：將本地分支改為 `main`**
+1. 重命名本地分支為 `main`：
+   ```cmd
+   git branch -m master main
+   ```
+2. 推送 `main` 分支到遠端：
+   ```cmd
+   git push origin main
+   ```
+3. 設定本地與遠端分支的追蹤關係：
+   ```cmd
+   git branch --set-upstream-to=origin/main
+   ```
+
+#### **方法 2：保持本地為 `master`**
+若您不想更改本地分支名稱，可以將本地分支 `master` 推送至遠端：
+1. 推送 `master` 分支到遠端：
+   ```cmd
+   git push origin master
+   ```
+2. 設定本地與遠端分支的追蹤關係：
+   ```cmd
+   git branch --set-upstream-to=origin/master
+   ```
+
+---
+
+錄，例如：
+   ```cmd
+   cd D:\Python Programs\database_actuators
+   ```
+
+2. 初始化專案為 Git 儲存庫：
+   ```cmd
+   git init
+   ```
+   - 成功執行後，您應該看到：
+     ```plaintext
+     Initialized empty Git repository in D:/Python Programs/database_actuators/.git/
+     ```
+
+3. 確認當前目錄安全性：
+   - 如果收到以下錯誤訊息：
+     ```plaintext
+     fatal: detected dubious ownership in repository at 'D:/Python Programs/database_actuators'
+     ```
+     - 執行以下命令將目錄標記為安全：
+       ```cmd
+       git config --global --add safe.directory "D:/Python Programs/database_actuators"
+       ```
+
+4. 執行 `git status` 確認初始化成功：
+   ```cmd
+   git status
+   ```
+   - 如果返回錯誤訊息，例如 **`not a git repository`**，請檢查當前目錄是否正確。
+
+---
+
+### **4.3 確認本地與遠端分支**
+1. **檢查本地分支**
+   執行以下命令確認目前所在分支名稱：
+   ```cmd
+   git branch
+   ```
+   - 預期結果會顯示目前所在分支名稱，例如：
+     ```plaintext
+     * master
+     ```
+     這表示當前分支是 **`master`**。
+
+2. **檢查遠端儲存庫分支**
+   執行以下命令檢查遠端儲存庫是否已存在分支：
+   ```cmd
+   git remote show origin
+   ```
+   - 如果遠端分支顯示為 `main`，而您的本地分支是 `master`，則需要同步名稱。
+
+---
+
+### **4.4 設定正確分支名稱**
+若您的本地與遠端分支名稱不同，請按照以下步驟進行修正：
+
+#### **方法 1：將本地分支改為 `main`**
+1. 重命名本地分支為 `main`：
+   ```cmd
+   git branch -m master main
+   ```
+2. 推送 `main` 分支到遠端：
+   ```cmd
+   git push origin main
+   ```
+3. 設定本地與遠端分支的追蹤關係：
+   ```cmd
+   git branch --set-upstream-to=origin/main
+   ```
+
+#### **方法 2：保持本地為 `master`**
+若您不想更改本地分支名稱，可以將本地分支 `master` 推送至遠端：
+1. 推送 `master` 分支到遠端：
+   ```cmd
+   git push origin master
+   ```
+2. 設定本地與遠端分支的追蹤關係：
+   ```cmd
+   git branch --set-upstream-to=origin/master
+   ```
+
+---
+
+### **4.5 確認分支設定完成**
+執行以下命令確認追蹤狀態：
+```cmd
+git status
+```
+- 若結果顯示：
+  ```plaintext
+  On branch main
+  Your branch is up to date with 'origin/main'.
+  ```
+  表示本地與遠端分支已成功同步。
+
+### **4.6 快速將多檔案修改加入版本控制**
+若有多個修改檔案需一次性加入版本控制，可執行：
+1. **將所有已修改或新增的檔案加入版本控制**：
+   ```cmd
+   git add .
+   ```
+   - 此指令不會包括刪除的檔案。
+
+2. **包含已刪除的檔案**：
+   ```cmd
+   git add -A
+   ```
+
+3. **提交所有修改**：
+   ```cmd
+   git commit -m "批次提交所有修改檔案"
+   ```
+
+4. **推送到遠端**：
+   ```cmd
+   git push origin main
+   ```
 
 ---
 
